@@ -7,6 +7,7 @@ dependencies:
   helmet: 3.15.0
   mocha: 3.5.3
   mongodb: 2.2.36
+  node-fetch: 2.3.0
   zombie: 5.0.8
 packages:
   /abab/1.0.4:
@@ -946,6 +947,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-ICtIAhoMTL3i34DeFaF0Q8i0OYA=
+  /node-fetch/2.3.0:
+    dev: false
+    engines:
+      node: 4.x || >=6.0.0
+    resolution:
+      integrity: sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
   /nwmatcher/1.4.4:
     dev: false
     resolution:
@@ -1473,4 +1480,5 @@ specifiers:
   helmet: ^3.1.0
   mocha: ^3.2.0
   mongodb: ^2.2.16
+  node-fetch: ^2.3.0
   zombie: ^5.0.5
