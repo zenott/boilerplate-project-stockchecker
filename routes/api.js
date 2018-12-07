@@ -43,11 +43,11 @@ module.exports = function (app) {
             upsert=false;
           }
           const doc = await db.collection('likes').findOneAndUpdate({stock: stock}, updObj, {upsert: upsert, returnOriginal: false}).catch(err => console.error(err));
-          res.json({stockdata: {stock: stock, price: text, likes: (doc.value) ? doc.value.likes : 0}});
+          res.json({stockData: {stock: stock.toUpperCase(), price: Number(text), likes: (doc.value) ? doc.value.likes : 0}});
 
         } else {
           const doc = await db.collection('likes').findOne({stock: stock}).catch(err => console.error(err));
-          res.json({stockdata: {stock: stock, price: text, likes: (doc) ? doc.likes : 0}});
+          res.json({stockData: {stock: stock.toUpperCase(), price: Number(text), likes: (doc) ? doc.likes : 0}});
         }
               
             
@@ -71,13 +71,13 @@ module.exports = function (app) {
             const doc = await db.collection('likes').findOneAndUpdate({stock: stockEle}, updObj, {upsert: upsert, returnOriginal: false}).catch(err => console.error(err));
             return doc.value;
           }));
-          res.json({stockdata: [{stock: stock[0], price: prices[0], likes: docArr[0].likes-docArr[1].likes}, {stock: stock[1], price: prices[1], likes: docArr[1].likes-docArr[0].likes}]});
+          res.json({stockData: [{stock: stock[0].toUpperCase(), price: Number(prices[0]), likes: docArr[0].likes-docArr[1].likes}, {stock: stock[1].toUpperCase(), price: Number(prices[1]), likes: docArr[1].likes-docArr[0].likes}]});
         } else {
           const docArr = await Promise.all(stock.map(stockEle => db.collection('likes').findOne({stock: stockEle}))).catch(err => console.error(err));
           let likes=[0, 0];
           if(docArr[0]) likes[0] = docArr[0].likes;
           if(docArr[1]) likes[1] = docArr[1].likes;
-          res.json({stockdata: [{stock: stock[0], price: prices[0], likes: likes[0]-likes[1]}, {stock: stock[1], price: prices[1], likes: likes[1]-likes[0]}]});
+          res.json({stockData: [{stock: stock[0].toUpperCase(), price: Number(prices[0]), likes: likes[0]-likes[1]}, {stock: stock[1].toUpperCase(), price: Number(prices[1]), likes: likes[1]-likes[0]}]});
         }
       }
     });
